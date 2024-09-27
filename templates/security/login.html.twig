@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connection{% endblock %}
 
 {% block body %}
     <form method="post" class="form-connection">
@@ -10,17 +10,24 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                Vous êtes connectez {{ app.user.userIdentifier }}<a class="text-decoration-none text-center" href="{{ path('app_logout') }}">Déconnection</a>
             </div>
         {% endif %}
 
-        <h2 class="h3">Connecter vous</h2>
+        <h3 class="conn-head">Connectez vous</h3>
         <div class="input-form">
             <label for="inputUsername">Email ou nom d'utilisateur</label>
-            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="" autocomplete="username" required autofocus>
-            <label for="inputPassword">Mot de passe</label>
-            <input type="password" name="password" id="inputPassword" class="" autocomplete="current-password" required>
-            
+            {% if app.user %}
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="" autocomplete="username" required autofocus disabled>
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="" autocomplete="current-password" required disabled>
+                
+                {% else %}
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="" autocomplete="username" required autofocus>
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="" autocomplete="current-password" required>
+                
+            {% endif %}
         </div>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -31,13 +38,16 @@
             </label>
         </div>
 
-        <button class="" type="submit">
-            Se connecter
-        </button>
-        <div class="links">
-            <a href="#"> Mot de passe oublié ? </a>
-            <a href="#"> S'enregistrer </a>
-        </div>
+        {% if app.user %}
+            <button class="py-3 d-flex justify-content-center align-items-center" type="submit">
+                <a class="text-decoration-none text-white" href="{{ path('admin') }}"> Se connecter </a>
+            </button>
+            {% else %}
+            <button class=" py-3 d-flex justify-content-center align-items-center " type="submit">
+                Se connecter
+            </button>
+        {% endif %}
+
 
     </form>
     <div class="img-deco">

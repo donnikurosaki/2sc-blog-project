@@ -1,11 +1,11 @@
 <div class="comment mb-5" id="c-{{ comment.id }}">
+    <h6 class="card-title mb-3">
+        <span>Écrit par <strong> {{ comment.author }} </strong> le</span>
+        {{ comment.createdAt | date('d M Y à H:i:s') }}
+    </h6>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">
-                <a href="" class="text-decoration-none"></a> 
-                {{ comment.createdAt | date('d M Y à H:i:s') }}
-            </h5>
-            <p class="card-text"> {{ comment.content }} </p>
+            <p class="card-text comment-content" id="comment-content"> {{ comment.content }} </p>
         </div>
     </div>
 </div>

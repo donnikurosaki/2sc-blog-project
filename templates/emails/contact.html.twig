@@ -1,0 +1,16 @@
+
+{% apply inky_to_html %}
+    <container>
+        <row class="">
+            <columns>
+                <h1 class="">
+                    Un email de {{ contactData.name }}
+                </h1>
+                <h3> Son addresse mail: {{ contactData.email }} </h3>
+                <p> {{ contactData.message|nl2br }} </p>
+            </columns>
+        </row>
+    </container>
+{% endapply %}
+
+

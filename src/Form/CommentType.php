@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -19,8 +20,13 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('author', TextType::class, [
+                'label' => 'Votre nom',
+                'attr' => ['require']
+            ])
             ->add('content', TextareaType::class, [
-                'label' => 'Votre commentaire' 
+                'label' => 'Votre commentaire',
+                'attr' => ['require' ]
             ])
             ->add('article', HiddenType::class)
             ->add('send', SubmitType::class, [

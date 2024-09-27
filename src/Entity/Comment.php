@@ -25,6 +25,9 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comment')]
     private ?Article $article = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $author = null;
+
     public function __construct(Article $article)
     {
         $this->article = $article;
@@ -79,6 +82,18 @@ class Comment
     public function setArticle(?Article $article): static
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }

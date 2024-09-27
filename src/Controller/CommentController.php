@@ -33,6 +33,7 @@ class CommentController extends AbstractController
         }
 
         $comment =new Comment($article);
+        $comment->setAuthor($commentData['author']);
         $comment->setContent($commentData['content']);
         $comment->setCreatedAt(new \DateTimeImmutable());
 

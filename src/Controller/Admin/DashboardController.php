@@ -17,6 +17,7 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('admin/dashboard.html.twig');
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
@@ -45,10 +46,11 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Catégories', 'fa-solid fa-list', Category::class);
+        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Articles', 'fa-regular fa-newspaper', Article::class);
+        yield MenuItem::linkToCrud('Catégories', 'fa-solid fa-list', Category::class);
         yield MenuItem::linkToCrud('Commentaires', 'fa-regular fa-comment', Comment::class);
+        yield Menuitem::linkToRoute('Blog 2CS','fa fa-home','home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 

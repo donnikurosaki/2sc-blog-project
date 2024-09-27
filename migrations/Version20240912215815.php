@@ -19,13 +19,11 @@ final class Version20240912215815 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE article ADD created_at DATETIME COMMENT \'(DC2Type:datetime_immutable)\', ADD updated_at DATETIME COMMENT \'(DC2Type:datetime_immutable)\'');
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE article DROP created_at, DROP updated_at');
     }
 }

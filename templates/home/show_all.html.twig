@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %} Tous les articles {% endblock %}
+
+{% block body %}
+    <div class="container-fluid banner d-flex justify-content-center w-100 mb-3">
+        <div class="col-3 d-flex justify-content-center" id="part1">
+            <img alt="logo2cs" width="100px" height="100px" src="{{ asset('images/logo/bigLogo2cs.svg') }}">
+        </div>
+        <div class="col-9 mx-auto" id="part2">
+            <h3 class="my-5">Tout les articles du blog 2CS</h3>
+        </div>
+
+    </div>
+
+    <div class="container">
+        {% set test = 'r' %}
+        {% if test is empty %}
+            <h4 class="text-center"> Il n'y a pas encore d'article publié </h4>
+            {% else %}
+            
+            {% for article in articles %}
+                <div class="border mb-3 px-3 py-3 w-75 rounded-3 bg-white">
+                    <h4>
+                        <a class="text-decoration-none" href="{{ path('app_show', {id:article.id, slug:article.slug}) }}"> {{ article.titre }} </a>
+                    </h4>
+                    <p> {{ article.description }} </p>
+                    <span> Rédiger par: <strong> {{ article.author }} </strong> </span>
+                </div>
+            {% endfor %}
+            {%endif%}
+            <div class="my-5 mx-5 text-center">
+                <a class="text-decoration-none" href="{{ path('home') }}"> Retour à l'accueil </a>
+            </div>
+    </div>
+
+{% endblock %}

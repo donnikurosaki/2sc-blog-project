@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Accueil {% endblock %}
+{% block title %} Accueil Blog 2CS {% endblock %}
 
 
 {% block body %}
@@ -14,7 +14,7 @@
             <p> Sur cette page vous pouvez retrouvez tout les articles et les derniers postes que nous publions. </p>
         </div>
         <div class="col-6" id="part3">
-            <img alt="connected_girl" src="{{ asset('images/illustrations/home_illustration.svg') }}">
+            <img class="border rounded-3 shadow" width="500px" height="300px" alt="network_illustration" src="{{ asset('images/illustrations/network_illustration.jpg') }}">
         </div>
 
     </div>
@@ -22,19 +22,29 @@
     <section class="articles-latest">
 
         <div class="article-heading-parent">
-            <h4> Nos articles récents </h4>
+            <h4 class="text-decoration-underline"> Nos articles récents </h4>
             <div class="article-heading-container row">
-                {% for latest_article in latest_articles %}
+                {% set test = 'g' %}
+
+                {% if test is empty %}
+                    <div class="container border empty-latest rounded-3">
+                        <h5> Aucun article récent </h5>
+                    </div>
+                {% else %}
+                    {% for latest_article in latest_articles %}
                     <article class="col-3">
                         <div class="article-heading">
                             <h3> {{ latest_article.titre }} </h3>
                             <p class="text-secondary"> {{ latest_article.description }} </p>
                         </div>
                         <div class="article-presentation">
-                            <a href="{{ path('show', {id: latest_article.id, slug: latest_article.slug}) }}"> <img width="250px" height="150px" src="{{ asset('images/upload_article_image/' ~ latest_article.getImage() ) }}" alt=""> </a>
+                            <a href="{{ path('app_show', {id: latest_article.id, slug: latest_article.slug}) }}"> <img width="250px" height="150px" src="{{ asset('images/upload_article_image/' ~ latest_article.getImage() ) }}" alt=""> </a>
                         </div>
                     </article>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+                
             </div>
         </div>
 
@@ -42,16 +52,19 @@
 
     <hr>
     <div class="all-articles">
-            <h3> Nos articles </h3>
+            <h3 class="text-decoration-underline mb-5"> Nos articles </h3>
             <div class="container-article">
-                {% if articles is empty %}
-                    <p>No articles found.</p>
+                {% set test2 = 'j' %}
+                {% if test2 is empty %}
+                    <div class="empty-all border rounded-3 mb-3">
+                        <h5>Aucun article trouvé</h5>
+                    </div>
                 {% else %}
                     {% for article in articles %}
                         <article class="articles-item">
                             <h5> {{ article.titre }} </h5>
                             <p>{{ article.description }}</p>
-                            <button> <a href="{{ path('show', {id: article.id, slug: article.slug}) }}"> Lire l'article </a>
+                            <button> <a href="{{ path('app_show', {id: article.id, slug: article.slug}) }}"> Lire l'article </a>
                         </article>
                     {% endfor %}
                 {% endif %}

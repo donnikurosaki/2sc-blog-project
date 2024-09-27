@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6 my-5 rounded-3 py-3 px-3">
+                <img class="rounded-3" alt="contact_asset" src="{{ asset('/images/illustrations/contact.svg') }}">
+            </div>
+            <div class="col-6 border my-5 rounded-3 py-3 px-3 shadow">
+                {{ form_start(contactForm) }}
+                    <h3 class="mb-3"> Contactez nous </h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm"> {{ form_row(contactForm.name) }} </div>
+                        <div class="col-sm"> {{ form_row(contactForm.email) }} </div>
+                    </div>
+                {{ form_end(contactForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
